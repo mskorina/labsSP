@@ -1,0 +1,103 @@
+openapi: 3.0.2
+info:
+  description: Сервис хеширования
+  title: Hash Server API
+  version: 1.0.0
+externalDocs:
+  description: Сайт автора
+  url: Skorina.github.io
+servers:
+- description: local server
+  url: http://localhost:3000
+tags:
+- name: хеширование
+paths:
+  /getsha256:
+    get:
+      description: Получение хеша sha256
+      operationId: getsha256
+      parameters:
+      - description: Входная строка
+        example: getstringsha
+        explode: true
+        in: query
+        name: inputstring
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Sha256hash'
+          description: Хеш sha256
+      summary: Получение sha256 из исходной строки
+      tags:
+      - хеширование
+      x-openapi-router-controller: DefaultController
+      x-openapi-router-service: DefaultService
+  /getsha1:
+    get:
+      description: Получение хеша sha256
+      operationId: getsha1
+      parameters:
+      - description: Входная строка
+        example: getstringsha1
+        explode: true
+        in: query
+        name: inputstring
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Sha1hash'
+          description: Хеш sha1
+      summary: Получение sha1 из исходной строки
+      tags:
+      - хеширование
+      x-openapi-router-controller: DefaultController
+      x-openapi-router-service: DefaultService
+  /getmd5:
+    get:
+      description: Получение хеша mda5
+      operationId: getmd5
+      parameters:
+      - description: Входная строка
+        example: getstringmd5
+        explode: true
+        in: query
+        name: inputstring
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Md5hash'
+          description: Хеш md5
+      summary: Получение md5 из исходной строки
+      tags:
+      - хеширование
+      x-openapi-router-controller: DefaultController
+      x-openapi-router-service: DefaultService
+components:
+  schemas:
+    Sha256hash:
+      example: 999a344f775ed0bab74608b7e91b5f6fc943a009f8894edf0d6403ec0b2c2337
+      type: string
+    Sha1hash:
+      example: 76366c8c533e368a4a6c84e96e61c9a46e156971
+      type: string
+    Md5hash:
+      example: e2957abb274c5309b7bdde67db373984
+      type: string
